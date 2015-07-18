@@ -4,6 +4,7 @@
 ```python
 from pqrpy import PQRPy
 
+key = 'LOUPRKONTZGTKE-FOEVPDMQSA-N'
 caller = PQRPy()
 
 molecule_json = caller.json('LOUPRKONTZGTKE-FOEVPDMQSA-N')
