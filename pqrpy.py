@@ -22,3 +22,16 @@ class PQRPy(object):
             return read_mol
         except:
             raise Exception("That key is invalid")
+
+    def weekly(self):
+        request = Request("http://pqr.pitt.edu/api/weekly/")
+        try:
+            response = urlopen(request)
+            mol_list = response.read().split("\n")
+            weekly = []
+            for item in mol_list:
+                weekly.append(tuple(item.split(",")))
+
+            return weekly
+        except URLError:
+            raise Exception("Something went wrong")
