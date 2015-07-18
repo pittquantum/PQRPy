@@ -2,27 +2,23 @@ from urllib2 import Request, urlopen, URLError
 
 class PQRPy(object):
 
-    def __init__(self, key):
-        self.key = key
+    def __init__(self):
+        pass
 
-    def json(self):
-        request = Request("http://pqr.pitt.edu/api/json/" + self.key)
+    def json(self, key):
+        request = Request("http://pqr.pitt.edu/api/json/" + key)
         try:
             response = urlopen(request)
-            json_resp = response.read()
-            self.json_resp = json_resp
-
-            return json_resp
+            read_json = response.read()
+            return read_json
         except:
             raise Exception("That key is invalid")
 
-    def mol2(self):
-        request = Request("http://pqr.pitt.edu/api/mol/" + self.key)
+    def mol2(self, key):
+        request = Request("http://pqr.pitt.edu/api/mol/" + key)
         try:
             response = urlopen(request)
-            mol2_resp = response.read()
-            self.mol2_resp = mol2_resp
-
-            return mol2_resp
+            read_mol = response.read()
+            return read_mol
         except:
             raise Exception("That key is invalid")
