@@ -12,4 +12,6 @@ molecule_mol2 = caller.mol2(key) # Returns a MOL2 file as a string
 
 weekly_molecules = caller.weekly() # Returns a list formatted like
                                    # [(InchiKey, Name), (InchiKey, Name), ...]
+
+inchikeys = caller.inchikeys() # Returns a list of InChIKeys
 ```
