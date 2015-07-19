@@ -28,9 +28,7 @@ class PQRPy(object):
         try:
             response = urlopen(request)
             mol_list = response.read().split("\n")
-            weekly = []
-            for item in mol_list:
-                weekly.append(tuple(item.split(",")))
+            weekly = [tuple(x.split(",")) for x in mol_list] 
 
             return weekly
         except URLError:
