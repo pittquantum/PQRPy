@@ -2,26 +2,32 @@ from urllib2 import Request, urlopen, URLError
 
 class PQRPy(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, key):
+        self.key = key
+        self.json_str = None
+        self.mol2_str = None
 
-    def json(self, key):
+    def json(self):
         """Make a JSON API call to PQR
-        
-
-        Keyword arguments:
-        key -- the InChIKey for the molecule
 
         Returns a JSON string containing the data for that molecule
         """
 
-        request = Request("http://pqr.pitt.edu/api/json/" + key)
+        request = Request("http://pqr.pitt.edu/api/json/" + self.key)
         try:
             response = urlopen(request)
             read_json = response.read()
+            self.json_str = read_json
             return read_json
         except:
             raise Exception("That key is invalid")
+
+    def json_dict(self):
+        import json
+
+        if not self.json_str:
+            self.json_str = self.json()
+        return json.loads(self.json_str)
 
     def mol2(self, key):
         """Make a MOL2 API call to PQR
@@ -35,8 +41,9 @@ class PQRPy(object):
         request = Request("http://pqr.pitt.edu/api/mol/" + key)
         try:
             response = urlopen(request)
-            read_mol = response.read()
-            return read_mol
+            read_mol2 = response.read()
+            self.mol2_str = read_mol2
+            return read_mol2
         except:
             raise Exception("That key is invalid")
 
